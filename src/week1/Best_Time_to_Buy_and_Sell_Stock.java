@@ -1,6 +1,4 @@
-package week1;
-
-public class BestTimeToBuyAndSellStock {
+class Solution {
     public int maxProfit(int[] prices) {
         
         int start = prices[0];

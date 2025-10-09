@@ -1,8 +1,4 @@
-package week1;
-
-import java.util.*;
-
-class ValidParentheses {
+class Solution {
     public boolean isValid(String s) {
         if (s.length() == 1) return false;
 

@@ -1,8 +1,4 @@
-package week1;
-
-import java.util.*;
-
-class TwoSum {
+class Solution {
     public int[] twoSum(int[] nums, int target) {
         Map <Integer, Integer> hashMap = new HashMap<>();
 

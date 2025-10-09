@@ -1,6 +1,4 @@
-package week1;
-
-class FloodFill {
+class Solution {
     public int[][] floodFill(int[][] image, int sr, int sc, int color) {
         int originalColor = image[sr][sc];
         
