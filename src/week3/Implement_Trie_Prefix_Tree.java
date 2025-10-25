@@ -11,10 +11,10 @@ class TrieNode {
     }
 }
 
-public class Implement_Trie_Prefix_Tree {
+public class Trie {
     private TrieNode root;
 
-    public Implement_Trie_Prefix_Tree() {
+    public Trie() {
         root = new TrieNode();
     }
 
