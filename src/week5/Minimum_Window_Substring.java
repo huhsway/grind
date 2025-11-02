@@ -1,3 +1,4 @@
+
 import java.util.*;
 
 // https://leetcode.com/problems/minimum-window-substring/ 
@@ -41,7 +42,7 @@ public class Solution {
     }
 
     public static void main(String[] args) {
-        C_MinimumWindowSubstring solution = new C_MinimumWindowSubstring();
+        Solution solution = new Solution();
         String s = "AAAAAABC";
         String t = "ABC";
         String minWindow = solution.minWindow(s, t);

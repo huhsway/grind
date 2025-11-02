@@ -1,5 +1,3 @@
-package LeetCode.Array;
-
 import java.util.Arrays;
 
 // 네이버 면접에서도 나왔음

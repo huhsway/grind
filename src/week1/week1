@@ -7,22 +7,6 @@ Easy
 Array
 
 2
-Valid Parentheses
-Easy
-·
-20 mins
-·
-Stack
-
-3
-Merge Two Sorted Lists
-Easy
-·
-20 mins
-·
-Linked List
-
-4
 Best Time to Buy and Sell Stock
 Easy
 ·
@@ -30,66 +14,66 @@ Easy
 ·
 Array
 
-5
-Valid Palindrome
-Easy
-·
-15 mins
-·
-String
-
-6
-Invert Binary Tree
-Easy
-·
-15 mins
-·
-Binary Tree
-
-7
-Valid Anagram
-Easy
-·
-15 mins
-·
-String
-
-8
-Binary Search
-Easy
-·
-15 mins
-·
-Binary Search
-
-9
-Flood Fill
-Easy
-·
-20 mins
-·
-Graph
-
-10
-Maximum Subarray
-Medium
-·
-20 mins
-·
-Dynamic Programming
-
-11
-Lowest Common Ancestor of a Binary Search Tree
-Easy
-·
-20 mins
-·
-Binary Search Tree
-
-12
+3
 Insert Interval
 Medium
 ·
 25 mins
+·
+Array
+
+4
+3Sum
+Medium
+·
+30 mins
+·
+Array
+
+5
+Product of Array Except Self
+Medium
+·
+30 mins
+·
+Array
+
+6
+Combination Sum
+Medium
+·
+30 mins
+·
+Array
+
+7
+Merge Intervals
+Medium
+·
+30 mins
+·
+Array
+
+8
+Majority Element
+Easy
+·
+20 mins
+·
+Array
+
+9
+Sort Colors
+Medium
+·
+25 mins
+·
+Array
+
+10
+Contains Duplicate
+Easy
+·
+15 mins
 ·
 Array
