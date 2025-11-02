@@ -1,73 +1,79 @@
 1
-Clone Graph
-Medium
+Move Zeroes
+Easy
 ·
-25 mins
+20 mins
 ·
-Graph
+Array
 
 2
-Evaluate Reverse Polish Notation
-Medium
-·
-30 mins
-·
-Stack
-
-3
-Course Schedule
-Medium
-·
-30 mins
-·
-Graph
-
-4
-Implement Trie (Prefix Tree)
-Medium
-·
-35 mins
-·
-Trie
-
-5
-Coin Change
-Medium
-·
-25 mins
-·
-Dynamic Programming
-
-6
-Product of Array Except Self
+Meeting Rooms II
 Medium
 ·
 30 mins
 ·
 Array
 
-7
-Climbing Stairs
+3
+Sliding Window Maximum
+Hard
+·
+35 mins
+·
+Array
+
+4
+Squares of a Sorted Array
 Easy
 ·
 20 mins
 ·
-Dynamic Programming
+Array
+
+5
+3Sum Closest
+Medium
+·
+30 mins
+·
+Array
+
+6
+Non-overlapping Intervals
+Medium
+·
+20 mins
+·
+Array
+
+7
+Valid Palindrome
+Easy
+·
+15 mins
+·
+String
 
 8
+Valid Anagram
+Easy
+·
+15 mins
+·
+String
+
+9
+Longest Substring Without Repeating Characters
+Medium
+·
+30 mins
+·
+String
+
+10
 Longest Palindrome
 Easy
 ·
 20 mins
 ·
 String
-
-9
-Min Stack
-Medium
-·
-20 mins
-·
-Stack
-
-
