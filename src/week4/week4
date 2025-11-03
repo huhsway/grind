@@ -1,73 +1,71 @@
 1
-Reverse Linked List
+Minimum Window Substring
+Hard
+·
+30 mins
+·
+String
+
+2
+String to Integer (atoi)
+Medium
+·
+25 mins
+·
+String
+
+3
+Longest Palindromic Substring
+Medium
+·
+25 mins
+·
+String
+
+4
+Find All Anagrams in a String
+Medium
+·
+30 mins
+·
+String
+
+5
+Group Anagrams
+Medium
+·
+25 mins
+·
+String
+
+6
+Longest Repeating Character Replacement
+Medium
+·
+30 mins
+·
+String
+
+7
+Longest Common Prefix
 Easy
 ·
 20 mins
 ·
-Linked List
+String
 
-2
-Validate Binary Search Tree
+8
+Largest Number
 Medium
 ·
 20 mins
 ·
-Binary Search Tree
-
-3
-Number of Islands
-Medium
-·
-25 mins
-·
-Graph
-
-4
-Rotting Oranges
-Medium
-·
-30 mins
-·
-Graph
-
-5
-Search in Rotated Sorted Array
-Medium
-·
-30 mins
-·
-Binary Search
-
-6
-Combination Sum
-Medium
-·
-30 mins
-·
-Array
-
-7
-Permutations
-Medium
-·
-30 mins
-·
-Recursion
-
-8
-Merge Intervals
-Medium
-·
-30 mins
-·
-Array
+String
 
 9
-Lowest Common Ancestor of a Binary Tree
+Encode and Decode Strings
 Medium
 ·
 25 mins
 ·
-Binary Tree
-
-
+String
