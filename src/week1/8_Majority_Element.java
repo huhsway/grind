@@ -39,3 +39,15 @@ class Solution {
 //         return -1;
 //     }
 // }
+
+
+// 자바 맵 정렬 예제
+// List<Map.Entry<String, Integer>> entryList = new LinkedList<>(map.entrySet());
+// entryList.sort(((o1, o2) -> map.get(o1.getKey()) - map.get(o2.getKey())));
+// for(Map.Entry<String, Integer> entry : entryList){
+//     System.out.println("key : " + entry.getKey() + ", value : " + entry.getValue());
+// }
+
+//key : a, value : 1
+//key : b, value : 2
+//key : c, value : 3
