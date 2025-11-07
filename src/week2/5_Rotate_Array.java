@@ -43,8 +43,8 @@ public class Solution {
     public static void main(String[] args) {
         int[] arr = {1, 2, 3, 4, 5, 6};
         int t = 3;
-        RotateArray solution = new RotateArray();
-        System.out.println(Arrays.toString(solution.rotateArray(arr, t)));
+        Solution solution = new Solution();
+        System.out.println(Arrays.toString(solution.rotate(arr, t)));
     }
 
 }
