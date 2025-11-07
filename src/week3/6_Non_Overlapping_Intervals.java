@@ -8,9 +8,8 @@ class Solution {
         }
 
         // 1. 탐욕 알고리즘을 위해 구간을 '종료 시점'을 기준으로 오름차순 정렬합니다.
-        // 자바에서 2차원 배열의 정렬은 Comparator를 사용하여 정의합니다.
-        Arrays.sort(intervals, Comparator.comparingInt(a -> a[1]));
-
+        Arrays.sort(intervals, (a, b) -> a[1] - b[1]);
+        
         int n = intervals.length;
         
         // 2. 겹치지 않는 구간의 개수 (우리가 '유지'할 구간의 최대 개수)
