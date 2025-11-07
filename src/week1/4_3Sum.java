@@ -1,52 +1,53 @@
 import java.util.Arrays;
 
 class Solution {
-    public int threeSumClosest(int[] nums, int target) {
-        // 배열 정렬
-        Arrays.sort(nums);
+    public List<List<Integer>> threeSum(int[] nums) {
+
+        List<List<Integer>> result = new ArrayList<>();
         int n = nums.length;
-        
-        // 초기 최솟값 설정
-        int closestSum = nums[0] + nums[1] + nums[2];
-        
-        for (int i = 0; i < n - 2; i++) {
-            // 🔴 중복 제거 1: i 중복 스킵
-            if (i > 0 && nums[i] == nums[i - 1]) {
+
+        Arrays.sort(nums);
+
+        for (int standard = 0; standard < n - 2; standard++) {
+
+            int left = standard + 1;
+            int right = n - 1;
+
+            if (standard > 0 && nums[standard] == nums[standard - 1]) {
                 continue;
             }
-            
-            int left = i + 1;
-            int right = n - 1;
-            
+
             while (left < right) {
-                int sum = nums[i] + nums[left] + nums[right];
-                
-                // 최솟값 갱신 확인
-                if (Math.abs(sum - target) < Math.abs(closestSum - target)) {
-                    closestSum = sum;
-                }
-                
-                // 합 조정 및 포인터 이동
-                if (sum < target) {
-                    left++;
-                    // 🔴 중복 제거 2: left 중복 스킵
-                    while (left < right && nums[left] == nums[left - 1]) {
+
+                int total = nums[standard] + nums[left] + nums[right];
+
+                if (total == 0) {
+                    List<Integer> temp = new ArrayList<>();
+                    temp.addAll(Arrays.asList(nums[standard], nums[left], nums[right]));
+                    answer.add(temp);
+
+                    while (left < right && nums[left] == nums[left +1]) {
                         left++;
                     }
-                } else if (sum > target) {
-                    right--;
-                    // 🔴 중복 제거 3: right 중복 스킵
-                    while (left < right && nums[right] == nums[right + 1]) {
+
+                    while (left < right && nums[right] == nums[right - 1]) {
                         right--;
                     }
+
+                    left++;
+                    right--;
+                } else if (total > 0) {
+                    right--;
                 } else {
-                    // sum == target인 경우 즉시 반환
-                    return sum;
+                    left++;
                 }
+
             }
+
+            return answer;
+
         }
         
-        return closestSum;
     }
 }
 
