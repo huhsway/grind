@@ -33,6 +33,7 @@ class Solution {
                 int currentStreak = 1;
 
                 // 시퀀스 확장: currentNum + 1, + 2, ... 를 Set에서 찾습니다.
+                // 각 숫자가 while에서 최대 1번만 확인되기 때문에 O(1)이라고 본다
                 while (numSet.contains(currentNum + 1)) {
                     currentNum += 1;
                     currentStreak += 1;
