@@ -19,19 +19,23 @@ class Solution {
 
         long result = 0;
 
-        // 3. 숫자 처리 및 오버플로우 체크
+        // 3. 숫자 처리
         while (i < n && Character.isDigit(s.charAt(i))) {
             int digit = s.charAt(i) - '0';
+            result = result * 10 + digit;
             
-            // 오버플로우 체크
-            if (sign == 1 && result > (Integer.MAX_VALUE - digit) / 10) {
+            // 오버플로우 체크 - 부호 적용한 값으로 체크
+            long signedResult = result * sign;
+            // 음수가 1 더 커서 두번 체크
+            // Integer.MAX_VALUE =  2147483647  (+21억)
+            // Integer.MIN_VALUE = -2147483648  (-21억)
+            if (signedResult > Integer.MAX_VALUE) {
                 return Integer.MAX_VALUE;
             }
-            if (sign == -1 && -result < (Integer.MIN_VALUE + digit) / 10) {
+            if (signedResult < Integer.MIN_VALUE) {
                 return Integer.MIN_VALUE;
             }
 
-            result = result * 10 + digit;
             i++;
         }
 
