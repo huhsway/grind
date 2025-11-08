@@ -7,7 +7,7 @@ class Solution {
         }
 
         // 람다식으로 정렬
-        Arrays.sort(sNums, (s1, s2) -> (s2 + s1).compareTo(s1 + s2));
+        Arrays.sort(sNums, (a, b) -> (b + a).compareTo(a + b));
 
         // 엣지 케이스
         if (sNums[0].equals("0")) {
