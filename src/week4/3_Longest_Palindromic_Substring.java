@@ -7,8 +7,7 @@ public class Solution {
             right++;
         }
         // 팰린드롬의 길이 반환
-        aabba
-        0, 5
+        
         return right - left - 1;
     }
     

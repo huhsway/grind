@@ -5,6 +5,7 @@ class Solution {
             return findMedianSortedArrays(nums2, nums1);
         }
 
+        // 배열에서 자를 갯수가 필요하기 때문에 lengt-1이 아닌 length를 사용합니다.
         int m = nums1.length;
         int n = nums2.length;
         
@@ -29,6 +30,7 @@ class Solution {
             int maxLeft1 = (i == 0) ? Integer.MIN_VALUE : nums1[i - 1];
             // nums1의 오른쪽 최솟값 (i=m이면 +INF, 아니면 nums1[i])
             int minRight1 = (i == m) ? Integer.MAX_VALUE : nums1[i];
+            
             
             // nums2의 왼쪽 최댓값 (j=0이면 -INF, 아니면 nums2[j-1])
             int maxLeft2 = (j == 0) ? Integer.MIN_VALUE : nums2[j - 1];
