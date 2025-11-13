@@ -1,4 +1,4 @@
-.class Solution {
+class Solution {
    public void setZeroes(int[][] matrix) {
         // 행과 열의 길이를 저장
         int m = matrix.length;
