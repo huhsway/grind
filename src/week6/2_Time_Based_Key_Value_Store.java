@@ -9,8 +9,11 @@
 //     }
     
 //     public void set(String key, String value, int timestamp) {
-//         data.putIfAbsent(key, new TreeMap<>());
-//         data.get(key).put(timestamp, value);
+// data.putIfAbsent(key, new TreeMap<>());
+// data.get(key).put(timestamp, value); 
+// 위 두 줄을 아래 한 줄로 대체 가능
+// data.computeIfAbsent(key, k -> new TreeMap<>()).put(timestamp, value);
+
 //     }
 
 //     public String get(String key, int timestamp) {
