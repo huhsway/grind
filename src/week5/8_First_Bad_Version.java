@@ -8,7 +8,7 @@ public class Solution extends VersionControl {
         long firstBad = n;
 
         while (left <= right) {
-            long mid = (left + right) / 2;
+            long mid = left + (right - left) / 2;
 
             if (isBadVersion((int) mid)) {
                 firstBad = mid;
