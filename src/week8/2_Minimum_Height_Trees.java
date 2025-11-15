@@ -1,65 +1,90 @@
-import java.util.*;
-
 class Solution {
     public List<Integer> findMinHeightTrees(int n, int[][] edges) {
-        // 1. 엣지 케이스 처리: 노드가 1개 이하인 경우
-        if (n == 1) {
-            return Collections.singletonList(0);
-        }
-
-        // 2. 그래프 구축 및 Degree 계산
-        // 인접 리스트 (Adjacency List)
-        List<List<Integer>> adj = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            adj.add(new ArrayList<>());
-        }
+        if (n == 1) return Collections.singletonList(0);
         
-        // 각 노드의 연결 횟수 (Degree)
-        int[] degree = new int[n]; 
-
+        // 그래프 구축
+        List<List<Integer>> graph = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            graph.add(new ArrayList<>());
+        }
         for (int[] edge : edges) {
-            int u = edge[0];
-            int v = edge[1];
-            adj.get(u).add(v);
-            adj.get(v).add(u);
-            degree[u]++;
-            degree[v]++;
+            graph.get(edge[0]).add(edge[1]);
+            graph.get(edge[1]).add(edge[0]);
         }
-
-        // 3. 초기 잎 노드(Degree가 1인 노드) 큐에 추가
-        Queue<Integer> leaves = new ArrayDeque<>();
-        for (int i = 0; i < n; i++) {
-            if (degree[i] == 1) {
-                leaves.offer(i);
-            }
-        }
-
-        // 4. Layer-by-Layer 제거 (Topological Sort 유사)
-        int remainingNodes = n;
         
-        // 노드가 2개 이하가 될 때까지 반복
-        while (remainingNodes > 2) {
-            int leavesCount = leaves.size();
-            remainingNodes -= leavesCount;
-
-            // 현재 층의 모든 잎 노드를 제거
-            for (int i = 0; i < leavesCount; i++) {
-                int leaf = leaves.poll();
-                
-                // 잎 노드의 유일한 이웃 노드들을 처리
-                for (int neighbor : adj.get(leaf)) {
-                    // 이웃 노드의 Degree를 감소
-                    degree[neighbor]--;
-                    
-                    // 이웃 노드의 Degree가 새롭게 1이 되면, 다음 층의 잎 노드로 추가
-                    if (degree[neighbor] == 1) {
-                        leaves.offer(neighbor);
-                    }
+        // Step 1: 노드 0에서 가장 먼 노드 찾기
+        int farthest1 = findFarthest(graph, 0, n);
+        
+        // Step 2: 그 노드에서 다시 가장 먼 노드 찾기
+        int farthest2 = findFarthest(graph, farthest1, n);
+        
+        // Step 3: 두 끝점 사이의 경로 찾기
+        List<Integer> path = findPath(graph, farthest1, farthest2, n);
+        
+        // Step 4: 중간 노드 반환
+        int len = path.size();
+        if (len % 2 == 1) {
+            return Collections.singletonList(path.get(len / 2));
+        } else {
+            return Arrays.asList(path.get(len / 2 - 1), path.get(len / 2));
+        }
+    }
+    
+    // 가장 먼 노드 찾기
+    private int findFarthest(List<List<Integer>> graph, int start, int n) {
+        Queue<Integer> queue = new LinkedList<>();
+        boolean[] visited = new boolean[n];
+        
+        queue.offer(start);
+        visited[start] = true;
+        
+        int farthest = start;
+        while (!queue.isEmpty()) {
+            farthest = queue.poll();
+            for (int neighbor : graph.get(farthest)) {
+                if (!visited[neighbor]) {
+                    visited[neighbor] = true;
+                    queue.offer(neighbor);
                 }
             }
         }
-
-        // 5. 최종 결과 반환: 큐에 남아있는 노드들이 MHT의 루트
-        return new ArrayList<>(leaves);
+        
+        return farthest;
+    }
+    
+    // 두 노드 사이의 경로 찾기
+    private List<Integer> findPath(List<List<Integer>> graph, int start, int end, int n) {
+        Queue<Integer> queue = new LinkedList<>();
+        int[] parent = new int[n];
+        boolean[] visited = new boolean[n];
+        
+        Arrays.fill(parent, -1);
+        queue.offer(start);
+        visited[start] = true;
+        
+        // BFS로 end 찾기
+        while (!queue.isEmpty()) {
+            int node = queue.poll();
+            if (node == end) break;
+            
+            for (int neighbor : graph.get(node)) {
+                if (!visited[neighbor]) {
+                    visited[neighbor] = true;
+                    parent[neighbor] = node;
+                    queue.offer(neighbor);
+                }
+            }
+        }
+        
+        // 경로 역추적
+        List<Integer> path = new ArrayList<>();
+        int current = end;
+        while (current != -1) {
+            path.add(current);
+            current = parent[current];
+        }
+        
+        Collections.reverse(path);
+        return path;
     }
 }
