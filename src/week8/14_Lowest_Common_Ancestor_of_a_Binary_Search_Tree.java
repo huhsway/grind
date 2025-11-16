@@ -7,7 +7,7 @@
  * TreeNode(int x) { val = x; }
  * }
  */
-class Lowest_Common_Ancestor_of_a_Binary_Search_Tree {
+class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         // p와 q의 값을 root의 값과 비교합니다.
         int pVal = p.val;
