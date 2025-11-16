@@ -1,108 +1,81 @@
-import java.util.ArrayList;
-import java.util.List;
-
 class Solution {
-    private TrieNode root;
-    private int R, C;
-    private List<String> result;
-    private final int[][] DIRS = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
-
-    // 1. Trie Node 클래스 정의
+    // Trie 노드 정의
     class TrieNode {
         TrieNode[] children = new TrieNode[26];
-        String word = null;
+        String word = null; // 단어의 끝을 표시
     }
-
-    /**
-     * 메인 함수
-     */
+    
+    private int[][] directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+    
     public List<String> findWords(char[][] board, String[] words) {
-        if (board == null || board.length == 0 || words == null || words.length == 0) {
-            return new ArrayList<>();
-        }
-
-        R = board.length;
-        C = board[0].length;
-        result = new ArrayList<>();
-        root = new TrieNode();
-
-        // 2. Trie 구축
-        for (String word : words) {
-            insert(word);
-        }
-
-        // 3. 모든 셀에서 DFS 시작
-        for (int i = 0; i < R; i++) {
-            for (int j = 0; j < C; j++) {
-                dfs(board, i, j, root);
+        List<String> result = new ArrayList<>();
+        
+        // 1. Trie 구축
+        TrieNode root = buildTrie(words);
+        
+        // 2. 보드의 모든 셀에서 DFS 시작
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                dfs(board, i, j, root, result);
             }
         }
-
+        
         return result;
     }
-
-    /**
-     * Trie에 단어를 삽입하는 헬퍼 함수
-     */
-    private void insert(String word) {
-        TrieNode node = root;
-        for (char c : word.toCharArray()) {
-            int index = c - 'a';
-            if (node.children[index] == null) {
-                node.children[index] = new TrieNode();
-            }
-            node = node.children[index];
-        }
-        node.word = word;
-    }
-
-    /**
-     * DFS를 통해 격자에서 단어를 찾고 백트래킹 수행
-     */
-    private void dfs(char[][] board, int r, int c, TrieNode parentNode) {
-        // 1. 현재 셀의 문자 확인
-        char currentChar = board[r][c];
-        int index = currentChar - 'a';
+    
+    // Trie 구축
+    private TrieNode buildTrie(String[] words) {
+        TrieNode root = new TrieNode();
         
-        // Trie에서 다음 노드 찾기
-        TrieNode currentNode = parentNode.children[index];
-
-        // 2. Trie 매칭 실패 (단어의 접두사가 아님)
-        if (currentNode == null) {
+        for (String word : words) {
+            TrieNode node = root;
+            for (char c : word.toCharArray()) {
+                int idx = c - 'a';
+                if (node.children[idx] == null) {
+                    node.children[idx] = new TrieNode();
+                }
+                node = node.children[idx];
+            }
+            node.word = word; // 단어의 끝 표시
+        }
+        
+        return root;
+    }
+    
+    // DFS + Backtracking
+    private void dfs(char[][] board, int row, int col, TrieNode node, List<String> result) {
+        // 범위 체크
+        if (row < 0 || row >= board.length || col < 0 || col >= board[0].length) {
             return;
         }
-
-        // 3. 단어 발견
-        if (currentNode.word != null) {
-            result.add(currentNode.word);
-            // 중요: 이미 찾은 단어는 다시 찾지 않도록 Trie에서 제거
-            // 이렇게 하면 중복 결과가 방지되고 효율성이 높아집니다.
-            currentNode.word = null; 
-        }
-
-        // 4. 탐색 계속 및 백트래킹 준비
-        // 현재 셀을 방문 표시 (다시 사용하지 않도록 임시로 마킹)
-        board[r][c] = '#'; 
-
-        // 상하좌우 탐색
-        for (int[] dir : DIRS) {
-            int nr = r + dir[0];
-            int nc = c + dir[1];
-
-            // 경계 조건 확인
-            if (nr >= 0 && nr < R && nc >= 0 && nc < C) {
-                // 방문하지 않은 셀이면서 유효한 문자일 때 (Trie 탐색은 이미 위에서 처리됨)
-                if (board[nr][nc] != '#') {
-                    dfs(board, nr, nc, currentNode);
-                }
-            }
-        }
-
-        // 5. 백트래킹 (원래 상태로 복원)
-        board[r][c] = currentChar; 
         
-        // Optional Optimization:
-        // 만약 currentNode가 더 이상 자식 노드를 가지지 않으면, Trie에서 이 노드를 제거하여
-        // 향후 탐색을 더 빨리 끝낼 수 있도록 최적화할 수 있습니다. (구현 생략)
+        char c = board[row][col];
+        
+        // 이미 방문했거나 Trie에 없는 문자
+        if (c == '#' || node.children[c - 'a'] == null) {
+            return;
+        }
+        
+        // 다음 노드로 이동
+        node = node.children[c - 'a'];
+        
+        // 단어를 찾았을 때
+        if (node.word != null) {
+            result.add(node.word);
+            node.word = null; // 중복 방지
+        }
+        
+        // 현재 셀 방문 표시
+        board[row][col] = '#';
+        
+        // 4방향 탐색
+        for (int[] dir : directions) {
+            int newRow = row + dir[0];
+            int newCol = col + dir[1];
+            dfs(board, newRow, newCol, node, result);
+        }
+        
+        // 백트래킹: 원래 문자로 복원
+        board[row][col] = c;
     }
 }
