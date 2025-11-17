@@ -1,71 +1,52 @@
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Arrays;
-
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
 public class Codec {
 
-    // 노드의 정의
-    public class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-        TreeNode(int x) { val = x; }
-    }
-
-    // 직렬화: 트리를 문자열로 변환
+    // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
-        if (root == null) {
-            return "null";
-        }
-
         StringBuilder sb = new StringBuilder();
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.offer(root);
-
-        while (!queue.isEmpty()) {
-            TreeNode node = queue.poll();
-            if (node == null) {
-                sb.append("null,");
-            } else {
-                sb.append(node.val).append(",");
-                queue.offer(node.left);
-                queue.offer(node.right);
-            }
-        }
-        // 마지막 쉼표 제거
-        return sb.deleteCharAt(sb.length() - 1).toString();
+        serializeHelper(root, sb);
+        return sb.toString();
     }
 
-    // 역직렬화: 문자열을 트리로 변환
+    private void serializeHelper(TreeNode node, StringBuilder sb) {
+        if (node == null) {
+            sb.append("null,");
+            return;
+        }
+
+        sb.append(node.val).append(",");
+        serializeHelper(node.left, sb);
+        serializeHelper(node.right, sb);
+    }
+
+    // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
-        String[] nodes = data.split(",");
-        if (nodes[0].equals("null")) {
+
+        Queue<String> queue = new LinkedList<>(Arrays.asList(data.split(",")));
+        return deserializeHelper(queue);
+        
+    }
+
+    private TreeNode deserializeHelper(Queue<String> queue) {
+        String val = queue.poll();
+
+        if (val.equals("null")) {
             return null;
         }
 
-        Queue<TreeNode> queue = new LinkedList<>();
-        TreeNode root = new TreeNode(Integer.parseInt(nodes[0]));
-        queue.offer(root);
-        int i = 1;
+        TreeNode node = new TreeNode(Integer.parseInt(val));
+        node.left = deserializeHelper(queue);
+        node.right = deserializeHelper(queue);
 
-        while (!queue.isEmpty() && i < nodes.length) {
-            TreeNode parent = queue.poll();
-
-            // 왼쪽 자식 처리
-            if (!nodes[i].equals("null")) {
-                parent.left = new TreeNode(Integer.parseInt(nodes[i]));
-                queue.offer(parent.left);
-            }
-            i++;
-
-            // 오른쪽 자식 처리
-            if (i < nodes.length && !nodes[i].equals("null")) {
-                parent.right = new TreeNode(Integer.parseInt(nodes[i]));
-                queue.offer(parent.right);
-            }
-            i++;
-        }
-        return root;
+        return node;
     }
 }
 
