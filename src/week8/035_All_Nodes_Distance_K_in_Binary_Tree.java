@@ -15,7 +15,7 @@ class Solution {
         
         // 2단계: BFS로 거리 K인 노드 찾기
         List<Integer> result = new ArrayList<>();
-        Queue<TreeNode> queue = new LinkedList<>();
+        Queue<TreeNode> queue = new ArrayDeque<>();
         Set<TreeNode> visited = new HashSet<>();
         
         queue.offer(target);

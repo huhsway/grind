@@ -3,7 +3,7 @@ class Solution {
         if (root == null) return 0;
         
         int maxWidth = 0;
-        Queue<Pair> queue = new LinkedList<>();
+        Queue<Pair> queue = new ArrayDeque<>();
         queue.offer(new Pair(root, 0));
         
         while (!queue.isEmpty()) {

@@ -9,7 +9,7 @@ class Solution {
 
         int R = grid.length;
         int C = grid[0].length;
-        Queue<int[]> queue = new LinkedList<>();
+        Queue<int[]> queue = new ArrayDeque<>();
         int freshOranges = 0;
 
         // 1. 초기 상태 설정: 썩은 오렌지(2)를 큐에 넣고 신선한 오렌지(1)의 개수를 셉니다.

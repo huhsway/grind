@@ -7,7 +7,7 @@ class Solution {
         }
         
         // BFS를 위한 큐
-        Queue<String> queue = new LinkedList<>();
+        Queue<String> queue = new ArrayDeque<>();
         queue.offer(beginWord);
         
         // 방문 체크를 위해 wordSet에서 제거

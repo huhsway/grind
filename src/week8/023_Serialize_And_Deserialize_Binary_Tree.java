@@ -30,7 +30,7 @@ public class Codec {
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
 
-        Queue<String> queue = new LinkedList<>(Arrays.asList(data.split(",")));
+        Queue<String> queue = new ArrayDeque<>(Arrays.asList(data.split(",")));
         return deserializeHelper(queue);
         
     }

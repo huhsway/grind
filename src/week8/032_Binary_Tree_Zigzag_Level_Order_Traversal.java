@@ -18,7 +18,7 @@ class Solution {
         List<List<Integer>> result = new ArrayList<>();
         if (root == null) return result;
         
-        Queue<TreeNode> queue = new LinkedList<>();
+        Queue<TreeNode> queue = new ArrayDeque<>();
         queue.offer(root);
         boolean leftToRight = true; // 방향 플래그
         

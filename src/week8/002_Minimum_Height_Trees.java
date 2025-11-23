@@ -32,7 +32,7 @@ class Solution {
     
     // 가장 먼 노드 찾기
     private int findFarthest(List<List<Integer>> graph, int start, int n) {
-        Queue<Integer> queue = new LinkedList<>();
+        Queue<Integer> queue = new ArrayDeque<>();
         boolean[] visited = new boolean[n];
         
         queue.offer(start);

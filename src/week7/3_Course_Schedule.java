@@ -21,7 +21,7 @@ class Solution {
         }
 
         // 3. 진입차수가 0인 과목을 큐에 추가
-        Queue<Integer> queue = new LinkedList<>();
+        Queue<Integer> queue = new ArrayDeque<>();
         for (int i = 0; i < numCourses; i++) {
             if (inDegree[i] == 0) {
                 queue.add(i);
