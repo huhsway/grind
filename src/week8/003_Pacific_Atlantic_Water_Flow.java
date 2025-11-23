@@ -4,25 +4,22 @@ class Solution {
             return new ArrayList<>();
         }
 
-        int r = heights.length;
-        int c = heights[0].length;
+        boolean[][] pacific = new boolean[heights.length][heights[0].length];
+        boolean[][] atlantic = new boolean[heights.length][heights[0].length];
 
-        boolean[][] pacific = new boolean[r][c];
-        boolean[][] atlantic = new boolean[r][c];
-
-        for (int i = 0; i < c; i++) {
+        for (int i = 0; i < heights[0].length; i++) {
             dfs(heights, pacific, 0, i);
-            dfs(heights, atlantic, r-1, i);
+            dfs(heights, atlantic, heights.length-1, i);
         }
 
-        for (int i = 0; i < r; i++) {
+        for (int i = 0; i < heights.length; i++) {
             dfs(heights, pacific, i, 0);
-            dfs(heights, atlantic, i, c-1);
+            dfs(heights, atlantic, i, heights[0].length-1);
         }
 
         List<List<Integer>> result = new ArrayList<>();
-        for (int i = 0; i < r; i++) {
-            for (int j = 0; j < c; j++) {
+        for (int i = 0; i < heights.length; i++) {
+            for (int j = 0; j < heights[0].length; j++) {
                 if (pacific[i][j] && atlantic[i][j]) {
                     result.add(List.of(i, j));
                 }
@@ -33,8 +30,6 @@ class Solution {
     }
 
     private void dfs(int[][] heights, boolean[][] visited, int nr, int nc) {
-        int r = heights.length;
-        int c = heights[0].length;
 
         if (visited[nr][nc]) {
             return;
@@ -48,7 +43,7 @@ class Solution {
             int dr = nr + dir[0];
             int dc = nc + dir[1];
 
-            if (dr < 0 || dr >= r || dc < 0 || dc >= c) {
+            if (dr < 0 || dr >= heights.length || dc < 0 || dc >= heights[0].length) {
                 continue;
             }
 

@@ -4,15 +4,12 @@ class Solution {
             return 0;
         }
 
-        int r = matrix.length;
-        int c = matrix[0].length;
-
-        int[][] memo = new int[r][c];
+        int[][] memo = new int[matrix.length][matrix[0].length];
 
         int maxLength = 0;
 
-        for (int i = 0; i < r; i++) {
-            for (int j = 0; j < c; j++) {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
                 maxLength = Math.max(maxLength, dfs(matrix, memo, i, j));
             }
         }
@@ -25,9 +22,6 @@ class Solution {
             return memo[nr][nc];
         }
 
-        int r = matrix.length;
-        int c = matrix[0].length;
-
         int[][] directions = {{0,-1}, {0,1}, {-1,0}, {1,0}};
 
         int maxPath = 1;
@@ -36,7 +30,7 @@ class Solution {
             int dr = nr + dir[0];
             int dc = nc + dir[1];
 
-            if (dr < 0 || dr >= r || dc < 0 || dc >= c) {
+            if (dr < 0 || dr >= matrix.length || dc < 0 || dc >= matrix[0].length) {
                 continue;
             }
 
