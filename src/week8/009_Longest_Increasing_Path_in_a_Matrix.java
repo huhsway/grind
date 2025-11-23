@@ -1,67 +1,51 @@
 class Solution {
-    private int R, C;
-    // 상하좌우 네 방향
-    private final int[][] DIRS = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
-
-    /**
-     * 행렬에서 가장 긴 증가 경로의 길이를 찾습니다.
-     */
     public int longestIncreasingPath(int[][] matrix) {
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
             return 0;
         }
 
-        R = matrix.length;
-        C = matrix[0].length;
-        
-        // 메모이제이션 배열: memo[i][j]는 (i, j)에서 시작하는 LIP의 길이를 저장
-        int[][] memo = new int[R][C];
-        int maxPath = 0;
+        int r = matrix.length;
+        int c = matrix[0].length;
 
-        // 모든 셀을 시작점으로 DFS를 시도
-        for (int i = 0; i < R; i++) {
-            for (int j = 0; j < C; j++) {
-                maxPath = Math.max(maxPath, dfs(matrix, i, j, memo));
+        int[][] memo = new int[r][c];
+
+        int maxLength = 0;
+
+        for (int i = 0; i < r; i++) {
+            for (int j = 0; j < c; j++) {
+                maxLength = Math.max(maxLength, dfs(matrix, memo, i, j));
             }
         }
 
-        return maxPath;
+        return maxLength;
     }
 
-    /**
-     * (r, c)에서 시작하는 가장 긴 증가 경로의 길이를 계산합니다.
-     */
-    private int dfs(int[][] matrix, int r, int c, int[][] memo) {
-        // 이미 계산된 값이면 바로 반환 (Memoization)
-        if (memo[r][c] != 0) {
-            return memo[r][c];
+    private int dfs(int[][] matrix, int[][] memo, int nr, int nc) {
+        if (memo[nr][nc] != 0) {
+            return memo[nr][nc];
         }
 
-        // 현재 셀을 포함하므로 최소 길이는 1
-        int maxLen = 1;
+        int r = matrix.length;
+        int c = matrix[0].length;
 
-        // 상하좌우 탐색
-        for (int[] dir : DIRS) {
-            int nr = r + dir[0];
-            int nc = c + dir[1];
+        int[][] directions = {{0,-1}, {0,1}, {-1,0}, {1,0}};
 
-            // 1. 경계 조건 확인
-            if (nr < 0 || nr >= R || nc < 0 || nc >= C) {
+        int maxPath = 1;
+
+        for (int[] dir : directions) {
+            int dr = nr + dir[0];
+            int dc = nc + dir[1];
+
+            if (dr < 0 || dr >= r || dc < 0 || dc >= c) {
                 continue;
             }
 
-            // 2. 증가 경로 조건 확인 (다음 셀의 값이 현재 셀보다 커야 함)
-            if (matrix[nr][nc] > matrix[r][c]) {
-                // 재귀적으로 다음 경로의 길이를 얻음
-                int neighborPathLen = dfs(matrix, nr, nc, memo);
-                
-                // 경로 길이 업데이트: 1 (현재 셀) + neighborPathLen
-                maxLen = Math.max(maxLen, 1 + neighborPathLen);
+            if (matrix[dr][dc] > matrix[nr][nc]) {
+                maxPath = Math.max(maxPath, 1 + dfs(matrix, memo, dr, dc));
             }
         }
 
-        // 계산된 최대 길이를 메모 배열에 저장
-        memo[r][c] = maxLen;
-        return maxLen;
+        memo[nr][nc] = maxPath;
+        return maxPath;
     }
 }
