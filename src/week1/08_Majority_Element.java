@@ -8,7 +8,7 @@ class Solution {
             if (count == 0) {
                 candidate = num;
             }
-            if (num == candidate) {
+            if (candiate == num) {
                 count++;
             } else {
                 count--;
