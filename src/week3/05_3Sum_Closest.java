@@ -17,17 +17,17 @@ class Solution {
             int right = n - 1;
             
             while (left < right) {
-                int sum = nums[standard] + nums[left] + nums[right];
+                int total = nums[standard] + nums[left] + nums[right];
                 
                 // 최솟값 갱신
-                if (Math.abs(sum - target) < Math.abs(closestSum - target)) {
-                    closestSum = sum;
+                if (Math.abs(total - target) < Math.abs(closestSum - target)) {
+                    closestSum = total;
                 }
                 
-                if (sum == target) {
+                if (total == target) {
                     // 정확히 target과 같으면 즉시 반환
-                    return sum;
-                } else if (sum < target) {
+                    return total;
+                } else if (total < target) {
                     // 중복 제거: left
                     while (left < right && nums[left] == nums[left + 1]) {
                         left++;
