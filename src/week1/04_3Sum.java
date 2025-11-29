@@ -1,120 +1,58 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
-
         List<List<Integer>> result = new ArrayList<>();
         int n = nums.length;
 
+        // 1. 배열 정렬 (필수)
         Arrays.sort(nums);
 
         for (int standard = 0; standard < n - 2; standard++) {
-
-            int left = standard + 1;
-            int right = n - 1;
-
+            // standard 중복 건너뛰기
             if (standard > 0 && nums[standard] == nums[standard - 1]) {
                 continue;
             }
 
-            while (left < right) {
+            int left = standard + 1;
+            int right = n - 1;
 
+            while (left < right) {
                 int total = nums[standard] + nums[left] + nums[right];
 
                 if (total == 0) {
-                    List<Integer> temp = new ArrayList<>();
-                    temp.addAll(Arrays.asList(nums[standard], nums[left], nums[right]));
-                    answer.add(temp);
+                    // 🎯 정답을 찾은 경우: 3Sum의 핵심 로직 유지
+                    result.add(Arrays.asList(nums[standard], nums[left], nums[right]));
 
-                    while (left < right && nums[left] == nums[left +1]) {
+                    // left/right 중복 제거 로직 (다음 고유한 쌍을 찾기 위함)
+                    while (left < right && nums[left] == nums[left + 1]) {
                         left++;
                     }
-
                     while (left < right && nums[right] == nums[right - 1]) {
                         right--;
                     }
+                    
+                    // 정답을 찾았으므로 두 포인터 모두 이동
+                    left++;
+                    right--;
 
+                } else if (total < 0) {
+                    // 3Sum Closest 스타일: 합이 작으면 left 증가
                     left++;
+                    
+                    // 3Sum Closest처럼 이동 후 중복 처리 (필요하다면)
+                    // (단, 3Sum에서는 total == 0 일 때만 중복 제거하는 것이 일반적)
+                    
+                } else { // total > 0
+                    // 3Sum Closest 스타일: 합이 크면 right 감소
                     right--;
-                } else if (total > 0) {
-                    right--;
-                } else {
-                    left++;
+                    
+                    // 3Sum Closest처럼 이동 후 중복 처리 (필요하다면)
                 }
-
             }
-
-            return answer;
-
         }
-        
+        return result;
     }
 }
-
-// 번외 리스트에서 중복 제거
-
-// 1. 순서 유지 안됨
-// import java.util.*;
-
-// public class Solution {
-//     public static void main(String[] args) {
-//         List<List<Integer>> list = new ArrayList<>();
-//         list.add(Arrays.asList(-1, 0, 1));
-//         list.add(Arrays.asList(-1, 0, 1));  // 중복
-//         list.add(Arrays.asList(-1, -1, 2));
-        
-//         System.out.println("원본: " + list);
-//         // 원본: [[-1, 0, 1], [-1, 0, 1], [-1, -1, 2]]
-        
-//         // HashSet 사용
-//         Set<List<Integer>> set = new HashSet<>(list);
-//         List<List<Integer>> result = new ArrayList<>(set);
-        
-//         System.out.println("중복 제거: " + result);
-//         // 중복 제거: [[-1, 0, 1], [-1, -1, 2]]
-//     }
-// }
-
-// 2. 순서를 유지해야 한다면
-// import java.util.*;
-
-// public class Solution {
-//     public static void main(String[] args) {
-//         List<List<Integer>> list = new ArrayList<>();
-//         list.add(Arrays.asList(-1, 0, 1));
-//         list.add(Arrays.asList(-1, 0, 1));  // 중복
-//         list.add(Arrays.asList(-1, -1, 2));
-        
-//         System.out.println("원본: " + list);
-        
-//         // LinkedHashSet 사용 (순서 유지!)
-//         Set<List<Integer>> set = new LinkedHashSet<>(list);
-//         List<List<Integer>> result = new ArrayList<>(set);
-        
-//         System.out.println("중복 제거: " + result);
-//         // 중복 제거: [[-1, 0, 1], [-1, -1, 2]]
-//     }
-// }
-
-// 3. stream 사용 + 순서 유지 됨
-// import java.util.*;
-// import java.util.stream.Collectors;
-
-// public class Solution {
-//     public static void main(String[] args) {
-//         List<List<Integer>> list = new ArrayList<>();
-//         list.add(Arrays.asList(-1, 0, 1));
-//         list.add(Arrays.asList(-1, 0, 1));  // 중복
-//         list.add(Arrays.asList(-1, -1, 2));
-        
-//         System.out.println("원본: " + list);
-        
-//         // Stream 사용
-//         List<List<Integer>> result = list.stream()
-//                                           .distinct()  // 중복 제거
-//                                           .collect(Collectors.toList());
-        
-//         System.out.println("중복 제거: " + result);
-//         // 중복 제거: [[-1, 0, 1], [-1, -1, 2]]
-//     }
-// }

@@ -7,17 +7,17 @@ class Solution {
         
         int closestSum = nums[0] + nums[1] + nums[2];
         
-        for (int i = 0; i < n - 2; i++) {
+        for (int standard = 0; standard < n - 2; standard++) {
             // 중복 제거: i
-            if (i > 0 && nums[i] == nums[i - 1]) {
+            if (standard > 0 && nums[standard] == nums[standard - 1]) {
                 continue;
             }
             
-            int left = i + 1;
+            int left = standard + 1;
             int right = n - 1;
             
             while (left < right) {
-                int sum = nums[i] + nums[left] + nums[right];
+                int sum = nums[standard] + nums[left] + nums[right];
                 
                 // 최솟값 갱신
                 if (Math.abs(sum - target) < Math.abs(closestSum - target)) {
