@@ -23,7 +23,7 @@ class Node {
 
 class Solution {
     // 원본 노드 -> 복제된 노드를 매핑하는 맵
-    private HashMap<Node, Node> visited = new HashMap<>();
+    private Map<Node, Node> visited = new HashMap<>();
 
     public Node cloneGraph(Node node) {
         // 1. null 입력 처리
