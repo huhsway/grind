@@ -3,13 +3,13 @@ class Solution {
         int r = mat.length;
         int c = mat[0].length;
         int[][] dist = new int[r][c];
-        Queue<int[]> q = new LinkedList<>();
+        Queue<int[]> q = new ArrayDeque<>();
 
         for (int i = 0; i < r; i++) {
             for (int j = 0; j < c; j++) {
                 if (mat[i][j] == 0) {
                     dist[i][j] = 0;
-                    q.offer(new int[]{i,j});
+                    q.offer(new int[] {i,j});
                 } else {
                     dist[i][j] = Integer.MAX_VALUE;
                 }
@@ -18,7 +18,7 @@ class Solution {
 
         int[][] dirs = {{0,1},{0,-1},{1,0},{-1,0}};
 
-        while(!q.isEmpty()) {
+        while (!q.isEmpty()) {
             int[] pos = q.poll();
             int ny = pos[0], nx = pos[1];
 
@@ -30,12 +30,11 @@ class Solution {
 
                 if (dist[ny][nx] + 1 < dist[dy][dx]) {
                     dist[dy][dx] = dist[ny][nx] + 1;
-                    q.offer(new int[]{dy,dx});
+                    q.offer(new int[] {dy,dx});
                 }
             }
         }
 
         return dist;
-
     }
 }
