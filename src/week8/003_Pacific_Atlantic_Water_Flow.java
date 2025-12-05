@@ -29,26 +29,26 @@ class Solution {
         return result;
     }
 
-    private void dfs(int[][] heights, boolean[][] visited, int nr, int nc) {
+    private void dfs(int[][] heights, boolean[][] visited, int y, int x) {
 
-        if (visited[nr][nc]) {
+        if (visited[y][x]) {
             return;
         }
 
-        visited[nr][nc] = true;
+        visited[y][x] = true;
 
         int[][] directions = {{-1,0},{1,0},{0,-1},{0,1}};
 
         for (int[] dir : directions) {
-            int dr = nr + dir[0];
-            int dc = nc + dir[1];
+            int dy = y + dir[0];
+            int dx = y + dir[1];
 
-            if (dr < 0 || dr >= heights.length || dc < 0 || dc >= heights[0].length) {
+            if (dy < 0 || dy >= heights.length || dx < 0 || dx >= heights[0].length) {
                 continue;
             }
 
-            if (heights[dr][dc] >= heights[nr][nc]) {
-                dfs(heights, visited, dr, dc);
+            if (heights[dy][dx] >= heights[y][x]) {
+                dfs(heights, visited, dy, dx);
             }
         }
     }

@@ -17,9 +17,9 @@ class Solution {
         return maxLength;
     }
 
-    private int dfs(int[][] matrix, int[][] memo, int nr, int nc) {
-        if (memo[nr][nc] != 0) {
-            return memo[nr][nc];
+    private int dfs(int[][] matrix, int[][] memo, int y, int x) {
+        if (memo[y][x] != 0) {
+            return memo[y][x];
         }
 
         int[][] directions = {{0,-1}, {0,1}, {-1,0}, {1,0}};
@@ -27,19 +27,19 @@ class Solution {
         int maxPath = 1;
 
         for (int[] dir : directions) {
-            int dr = nr + dir[0];
-            int dc = nc + dir[1];
+            int dy = y + dir[0];
+            int dx = x + dir[1];
 
-            if (dr < 0 || dr >= matrix.length || dc < 0 || dc >= matrix[0].length) {
+            if (dy < 0 || dy >= matrix.length || dx < 0 || dx >= matrix[0].length) {
                 continue;
             }
 
-            if (matrix[dr][dc] > matrix[nr][nc]) {
-                maxPath = Math.max(maxPath, 1 + dfs(matrix, memo, dr, dc));
+            if (matrix[dy][dx] > matrix[y][x]) {
+                maxPath = Math.max(maxPath, 1 + dfs(matrix, memo, dy, dx));
             }
         }
 
-        memo[nr][nc] = maxPath;
+        memo[y][x] = maxPath;
         return maxPath;
     }
 }

@@ -54,7 +54,7 @@ class Solution {
     
     // 두 노드 사이의 경로 찾기
     private List<Integer> findPath(List<List<Integer>> graph, int start, int end, int n) {
-        Queue<Integer> queue = new LinkedList<>();
+        Queue<Integer> queue = new ArrayDeque<>();
         int[] parent = new int[n];
         boolean[] visited = new boolean[n];
         
