@@ -1,5 +1,5 @@
 class Solution {
-    class TrieNode {
+    private static class TrieNode {
         TrieNode[] children = new TrieNode[26];
         String word = null;
     }
