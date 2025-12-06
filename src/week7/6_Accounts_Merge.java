@@ -1,10 +1,10 @@
 import java.util.*;
 
 class Solution {
-    public List<List<String>> accountsMerge(List<List<String>> accounts) {
-        Map<String, String> parent = new HashMap<>();
-        Map<String, String> emailToName = new HashMap<>();
+    private Map<String, String> parent = new HashMap<>();
+    private Map<String, String> emailToName = new HashMap<>();
 
+    public List<List<String>> accountsMerge(List<List<String>> accounts) {
         // 1. 초기화: 모든 이메일을 자기 자신의 부모로 설정
         for (List<String> account : accounts) {
             String name = account.get(0);
@@ -19,14 +19,14 @@ class Solution {
         for (List<String> account : accounts) {
             String firstEmail = account.get(1);
             for (int i = 2; i < account.size(); i++) {
-                union(parent, firstEmail, account.get(i));
+                union(firstEmail, account.get(i));
             }
         }
 
         // 3. 그룹화: 같은 루트를 가진 이메일들을 모음
         Map<String, List<String>> mergedAccounts = new HashMap<>();
         for (String email : parent.keySet()) {
-            String root = find(parent, email);
+            String root = find(email);
             mergedAccounts.computeIfAbsent(root, k -> new ArrayList<>()).add(email);
         }
 
@@ -43,18 +43,18 @@ class Solution {
         return result;
     }
 
-    private String find(Map<String, String> parent, String s) {
+    private String find(String s) {
         if (parent.get(s).equals(s)) {
             return s;
         }
-        String root = find(parent, parent.get(s));
+        String root = find(parent.get(s));
         parent.put(s, root);
         return root;
     }
 
-    private void union(Map<String, String> parent, String s1, String s2) {
-        String root1 = find(parent, s1);
-        String root2 = find(parent, s2);
+    private void union(String s1, String s2) {
+        String root1 = find(s1);
+        String root2 = find(s2);
         if (!root1.equals(root2)) {
             parent.put(root2, root1);
         }
