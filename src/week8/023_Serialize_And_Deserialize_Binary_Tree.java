@@ -14,7 +14,7 @@ public class Codec {
         if (root == null) return "";
         
         StringBuilder sb = new StringBuilder();
-        Queue<TreeNode> queue = new LinkedList<>();
+        Queue<TreeNode> queue = new ArrayDeque<>();
         queue.offer(root);
         
         while (!queue.isEmpty()) {
@@ -37,7 +37,7 @@ public class Codec {
         
         String[] nodes = data.split(",");
         TreeNode root = new TreeNode(Integer.parseInt(nodes[0]));
-        Queue<TreeNode> queue = new LinkedList<>();
+        Queue<TreeNode> queue = new ArrayDeque<>();
         queue.offer(root);
         
         int i = 1;
