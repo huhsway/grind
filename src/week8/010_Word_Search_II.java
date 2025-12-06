@@ -32,13 +32,13 @@ class Solution {
         return result;   
     }
 
-    private void dfs(char[][] board, int nr, int nc, TrieNode node, List<String> result) {
+    private void dfs(char[][] board, int y, int x, TrieNode node, List<String> result) {
 
-        if (nr < 0 || nr >= board.length || nc < 0 || nc >= board[0].length) {
+        if (y < 0 || y >= board.length || x < 0 || x >= board[0].length) {
             return;
         }
 
-        char c = board[nr][nc];
+        char c = board[y][x];
 
         if (c == '#' || node.children[c - 'a'] == null) {
             return;
@@ -51,14 +51,14 @@ class Solution {
             node.word = null;
         }
 
-        board[nr][nc] = '#';
+        board[y][x] = '#';
 
-        dfs(board, nr + 1, nc, node, result);
-        dfs(board, nr - 1, nc, node, result);
-        dfs(board, nr, nc + 1, node, result);
-        dfs(board, nr, nc - 1, node, result);
+        dfs(board, y + 1, x, node, result);
+        dfs(board, y - 1, x, node, result);
+        dfs(board, y, x + 1, node, result);
+        dfs(board, y, x - 1, node, result);
 
-        board[nr][nc] = c;
+        board[y][x] = c;
     }
 
 
