@@ -37,7 +37,7 @@ class Solution {
     }
     
     // 노드와 인덱스를 함께 저장하는 클래스
-    class Pair {
+    private static class Pair {
         TreeNode node;
         int index;
         
