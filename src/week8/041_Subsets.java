@@ -10,7 +10,7 @@ class Solution {
         List<Integer> currentSubset = new ArrayList<>();
         
         // 백트래킹 시작: 시작 인덱스는 0
-        backtrack(nums, 0, currentSubset, result);
+        getCombinations(nums, 0, currentSubset, result);
         
         return result;
     }
@@ -22,7 +22,7 @@ class Solution {
      * @param currentSubset 현재까지 구성된 부분집합
      * @param result 모든 부분집합을 저장할 최종 리스트
      */
-    private void backtrack(int[] nums, int start, List<Integer> currentSubset, List<List<Integer>> result) {
+    private void getCombinations(int[] nums, int start, List<Integer> currentSubset, List<List<Integer>> result) {
         
         // 1. **결과 추가**: 현재까지 구성된 currentSubset을 결과 리스트에 추가합니다.
         //    (빈 배열 []을 포함하여 모든 중간 부분집합이 여기서 추가됩니다.)
@@ -35,7 +35,7 @@ class Solution {
             
             // (b) **재귀**: 다음 원소(i+1)부터 탐색을 계속합니다.
             //     이는 현재 원소를 포함한 상태에서 다음 부분집합을 생성합니다.
-            backtrack(nums, i + 1, currentSubset, result);
+            getCombinations(nums, i + 1, currentSubset, result);
             
             // (c) **되돌리기(Backtrack)**: 재귀 호출에서 돌아온 후, 
             //     부분집합에서 nums[i]를 제거하여 다음 반복(i+1)에서 nums[i]를 포함하지 않은 
