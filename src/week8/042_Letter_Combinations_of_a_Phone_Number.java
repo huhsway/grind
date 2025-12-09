@@ -33,8 +33,7 @@ class Solution {
      * @param digits: 입력 숫자 문자열
      * @param index: 현재 처리 중인 digits의 인덱스
      */
-    private void backtrack(List<String> result, StringBuilder current, 
-                          String digits, int index) {
+    private void backtrack(List<String> result, StringBuilder current, String digits, int index) {
         // 기저 조건: 모든 숫자를 다 처리했으면
         if (index == digits.length()) {
             result.add(current.toString());
