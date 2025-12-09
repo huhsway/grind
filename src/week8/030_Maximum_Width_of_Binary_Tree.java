@@ -1,4 +1,15 @@
 class Solution {
+
+    private static class Pair {
+        TreeNode node;
+        int index;
+
+        Pair(TreeNode node, int index) {
+            this.node = node;
+            this.index = index;
+        }
+    }
+
     public int widthOfBinaryTree(TreeNode root) {
         if (root == null) return 0;
 
@@ -30,15 +41,5 @@ class Solution {
         }
 
         return maxWidth;
-    }
-
-    private static class Pair {
-        TreeNode node;
-        int index;
-
-        Pair(TreeNode node, int index) {
-            this.node = node;
-            this.index = index;
-        }
     }
 }
