@@ -1,6 +1,6 @@
 class Solution {
     // 숫자와 문자 매핑 (전화기 키패드)
-    private static final String[] PHONE = {
+    String[] phoneLetters = {
         "",     // 0
         "",     // 1
         "abc",  // 2
@@ -42,7 +42,7 @@ class Solution {
         
         // 현재 숫자에 해당하는 문자들 가져오기
         char digit = digits.charAt(index);
-        String letters = PHONE[digit - '0'];  // '2' - '0' = 2 (인덱스)
+        String letters = phoneLetters[digit - '0'];  // '2' - '0' = 2 (인덱스)
         
         // 각 문자에 대해 재귀 호출
         for (int i = 0; i < letters.length(); i++) {
