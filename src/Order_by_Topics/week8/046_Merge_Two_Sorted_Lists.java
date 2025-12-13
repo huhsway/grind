@@ -43,7 +43,7 @@
 class Solution {
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
         
-        ListNode dHead = new ListNode(0);
+        ListNode dHead = new ListNode();
         ListNode curr = dHead;
 
         while (list1 != null && list2 != null) {
