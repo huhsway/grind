@@ -19,6 +19,7 @@ class Solution {
     // 맵의 크기가 같고, 모든 키-값 쌍이 동일한지 확인하며,
     // 요소의 삽입 순서와는 상관없이 올바르게 비교합니다.
          return sMap.equals(tMap);
+
     }
 }
 
